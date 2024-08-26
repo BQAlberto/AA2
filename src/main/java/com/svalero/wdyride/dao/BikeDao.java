@@ -12,8 +12,15 @@ public interface BikeDao {
     @UseRowMapper(BikeMapper.class)
     List<Bike>getBikes();
 
+    @SqlQuery("SELECT * FROM BIKE WHERE SERIAL_NUMBER = ?")
+    @UseRowMapper(BikeMapper.class)
+    Bike getBike(String SERIAL_NUMBER);
+
     @SqlUpdate("INSERT INTO BIKE (SERIAL_NUMBER, CONDITION, BRAND, MODEL, PICTURE) VALUES (?, ?, ?, ?, ?)")
     int addBike(String SERIAL_NUMBER, String CONDITION, String BRAND, String MODEL, String PICTURE);
+
+    @SqlUpdate("UPDATE BIKE SET CONDITION = ?, BRAND = ?, MODEL = ?, PICTURE = ? WHERE SERIAL_NUMBER = ?")
+    int updateBike(String SERIAL_NUMBER, String CONDITION, String BRAND, String MODEL, String PICTURE);
 
     @SqlUpdate("DELETE FROM BIKE WHERE SERIAL_NUMBER = ?")
     int removeBike(String SERIAL_NUMBER);

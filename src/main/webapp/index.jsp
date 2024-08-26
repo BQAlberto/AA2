@@ -26,13 +26,13 @@
             %>
             <div class="col-md-4">
                 <div class="card mb-4">
-                    <img src="https://via.placeholder.com/350x150" class="card-img-top" alt="Location 1">
+                    <img src="../wdyRide_pictures/<%= bike.getPICTURE() %>" class="card-img-top" alt="Location 1"/>
                     <div class="card-body">
-                        <h5 class="card-title">Mountain Trails</h5>
+                        <h5 class="card-title">Mountain Bike</h5>
                         <p class="card-text"><%= bike.getBRAND()  %></p>
                         <p class="card-text"><%= bike.getMODEL()  %></p>
-                        <a href="view-bike.jsp" class="btn btn-primary">Ver</a>
-                        <a href="#" class="btn btn-primary">Editar</a>
+                        <a href="view-bike.jsp?SERIAL_NUMBER=<%= bike.getSERIAL_NUMBER()%>" class="btn btn-primary">Ver</a>
+                        <a href="edit-bike.jsp?SERIAL_NUMBER=<%=bike.getSERIAL_NUMBER()%>" class="btn btn-primary">Editar</a>
                         <a href="remove-bike?SERIAL_NUMBER=<%= bike.getSERIAL_NUMBER()%>" class="btn btn-danger">Eliminar</a>
                     </div>
                 </div>

@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <web-app>
     <display-name>What do you ride?</display-name>
+
+    <context-param>
+        <description>Ruta donde guardar las imágenes</description>
+        <param-name>image-path</param-name>
+        <param-value>C:/Program Files/apache-tomcat-9.0.91/webapps/wdyRide_pictures</param-value>
+    </context-param>
 </web-app>
