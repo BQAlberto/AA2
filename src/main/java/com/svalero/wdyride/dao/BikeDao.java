@@ -1,6 +1,7 @@
 package com.svalero.wdyride.dao;
 
 import com.svalero.wdyride.domain.Bike;
+import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 import org.jdbi.v3.sqlobject.statement.UseRowMapper;
@@ -11,6 +12,11 @@ public interface BikeDao {
     @SqlQuery("SELECT * FROM BIKE")
     @UseRowMapper(BikeMapper.class)
     List<Bike>getBikes();
+
+    @SqlQuery("SELECT * FROM BIKE WHERE BRAND LIKE '%' || :searchTerm || '%' " +
+            "OR MODEL LIKE '%' || :searchTerm || '%'")
+    @UseRowMapper(BikeMapper.class)
+    List<Bike> getBikessearch(@Bind("searchTerm") String searchTerm);
 
     @SqlQuery("SELECT * FROM BIKE WHERE SERIAL_NUMBER = ?")
     @UseRowMapper(BikeMapper.class)
