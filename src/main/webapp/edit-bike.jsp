@@ -18,6 +18,9 @@
 </script>-->
 
 <%
+    if (!ROLE.equals("ADMIN")) {
+        response.sendRedirect("/wdyRide");
+    }
     String SERIAL_NUMBER;
     Bike bike = null;
     if (request.getParameter("SERIAL_NUMBER") == null) {

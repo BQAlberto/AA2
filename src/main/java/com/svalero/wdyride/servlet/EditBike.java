@@ -7,10 +7,7 @@ import com.svalero.wdyride.domain.Bike;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
+import javax.servlet.http.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,12 +17,23 @@ import java.nio.file.Path;
 import java.sql.SQLException;
 import java.util.UUID;
 
+import static com.svalero.wdyride.util.ErrorUtils.sendError;
+import static com.svalero.wdyride.util.ErrorUtils.sendMessage;
+
 @WebServlet("/edit-bike")
 @MultipartConfig
 public class EditBike extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        HttpSession currentSession = request.getSession();
+        if (currentSession.getAttribute("ROLE") != null) {
+            if (currentSession.getAttribute("ROLE").equals("ADMIN")) {
+                response.sendRedirect("/wdyRide");
+            }
+        }
+
         try {
             // Verifica si el SERIAL_NUMBER está vacío
             String SERIAL_NUMBER = request.getParameter("SERIAL_NUMBER");
@@ -82,15 +90,5 @@ public class EditBike extends HttpServlet {
             sqle.printStackTrace();
             sendError("Database error", response);
         }
-    }
-
-    // Método que envía un mensaje de error en formato HTML
-    private void sendError(String message, HttpServletResponse response) throws IOException {
-        response.getWriter().println("<div class='alert alert-danger' role='alert'>" + message + "</div>");
-    }
-
-    // Método que envía un mensaje de éxito en formato HTML
-    private void sendMessage(String message, HttpServletResponse response) throws IOException {
-        response.getWriter().println("<div class='alert alert-success' role='alert'>" + message + "</div>");
     }
 }

@@ -10,7 +10,13 @@
         <h1>What Do You Ride?</h1>
         <p class="lead">Find the best model to ride bike!</p>
         <p>
+            <%
+                if (ROLE.equals("ADMIN")) {
+            %>
             <a href="edit-bike.jsp" class="btn btn-primary my-2">Add bike</a>
+            <%
+                }
+            %>
             <a href="#" class="btn btn-primary my-2">Ver calendario</a>
         </p>
     </div>
@@ -32,8 +38,14 @@
                         <p class="card-text"><%= bike.getBRAND()  %></p>
                         <p class="card-text"><%= bike.getMODEL()  %></p>
                         <a href="view-bike.jsp?SERIAL_NUMBER=<%= bike.getSERIAL_NUMBER()%>" class="btn btn-primary">Ver</a>
+                        <%
+                            if (ROLE.equals("ADMIN")) {
+                        %>
                         <a href="edit-bike.jsp?SERIAL_NUMBER=<%=bike.getSERIAL_NUMBER()%>" class="btn btn-primary">Editar</a>
                         <a href="remove-bike?SERIAL_NUMBER=<%= bike.getSERIAL_NUMBER()%>" class="btn btn-danger">Eliminar</a>
+                        <%
+                            }
+                        %>
                     </div>
                 </div>
             </div>
