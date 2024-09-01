@@ -38,6 +38,7 @@ public class LoginServlet extends HttpServlet {
                     dao -> dao.getCustomer(USERNAME, PASSWORD));
             if (customer != null) {
                 HttpSession session = request.getSession();
+                session.setAttribute("CUSTOMER_ID", customer.getCUSTOMER_ID());
                 session.setAttribute("USERNAME", customer.getUSERNAME());
                 session.setAttribute("ROLE", customer.getROLE());
                 response.getWriter().print("ok");

@@ -28,10 +28,9 @@ public class EditBike extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession currentSession = request.getSession();
-        if (currentSession.getAttribute("ROLE") != null) {
-            if (currentSession.getAttribute("ROLE").equals("ADMIN")) {
-                response.sendRedirect("/wdyRide");
-            }
+        if (currentSession.getAttribute("ROLE") == null || !currentSession.getAttribute("ROLE").equals("ADMIN")) {
+            response.sendRedirect("/wdyRide");
+            return;  // Exit the method if the user is not an admin
         }
 
         try {
@@ -42,10 +41,16 @@ public class EditBike extends HttpServlet {
                 return;
             }
 
+            // Verifica si el MODEL está vacío
+            String MODEL = request.getParameter("MODEL");
+            if (MODEL == null || MODEL.isBlank()) {
+                sendError("Model is required", response);
+                return;
+            }
+
             // Obtiene los demás parámetros de la solicitud
             String CONDITION = request.getParameter("CONDITION");
             String BRAND = request.getParameter("BRAND");
-            String MODEL = request.getParameter("MODEL");
             Part PICTUREPART = request.getPart("PICTURE");
 
             String imagePath = request.getServletContext().getInitParameter("image-path");

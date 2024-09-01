@@ -104,7 +104,7 @@
                 <a class="nav-link" href="login.jsp">Login</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Register</a>
+                <a class="nav-link" href="register-user.jsp">Register</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Contact</a>

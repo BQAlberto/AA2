@@ -1,6 +1,8 @@
 package com.svalero.wdyride.dao;
 
+import com.svalero.wdyride.domain.Bike;
 import com.svalero.wdyride.domain.Customer;
+import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 import org.jdbi.v3.sqlobject.statement.UseRowMapper;
@@ -12,6 +14,15 @@ public interface CustomerDao {
     @SqlQuery("SELECT * FROM CUSTOMER")
     @UseRowMapper(CustomerMapper.class)
     List<Customer>getAllCustomers();
+
+    @SqlQuery("SELECT * FROM CUSTOMER WHERE USERNAME LIKE '%' || :searchTerm || '%' " +
+            "OR FIRST_NAME LIKE '%' || :searchTerm || '%'" + "OR LAST_NAME LIKE '%' || :searchTerm || '%'")
+    @UseRowMapper(CustomerMapper.class)
+    List<Customer> getCustomersearch(@Bind("searchTerm") String searchTerm);
+
+    @SqlQuery("SELECT * FROM CUSTOMER WHERE USERNAME = ?")
+    @UseRowMapper(CustomerMapper.class)
+    Customer getCustomerByUsername(String USERNAME);
 
     @SqlQuery("SELECT * FROM CUSTOMER WHERE CUSTOMER_ID = ?")
     @UseRowMapper(CustomerMapper.class)

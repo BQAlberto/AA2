@@ -12,9 +12,13 @@
     <%
     HttpSession currentSession = request.getSession();
     String ROLE = "ANONYMOUS";
+    int CUSTOMER_ID  ;
     if (currentSession.getAttribute("ROLE") != null) {
         ROLE = currentSession.getAttribute("ROLE").toString();
     }
+    if (currentSession.getAttribute("CUSTOMER_ID") != null) {
+        CUSTOMER_ID = Integer.parseInt(currentSession.getAttribute("CUSTOMER_ID").toString());
+    }else {CUSTOMER_ID=0;}
 %>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -40,7 +44,7 @@
                 }
             %>
             <li class="nav-item">
-                <a class="nav-link" href="#">Register</a>
+                <a class="nav-link" href="register-user.jsp">Register</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Contact</a>

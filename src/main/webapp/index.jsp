@@ -20,10 +20,17 @@
                 if (ROLE.equals("ADMIN")) {
             %>
             <a href="edit-bike.jsp" class="btn btn-primary my-2">Add bike</a>
+            <a href="customers.jsp" class="btn btn-primary my-2">Customers</a>
             <%
                 }
             %>
-            <a href="#" class="btn btn-primary my-2">Ver calendario</a>
+            <%
+                if (ROLE.equals("USER")) {
+            %>
+            <a href="rents.jsp" class="btn btn-primary my-2">My rents</a>
+            <%
+                }
+            %>
         </p>
         <form class="row justify-content-center g-2" id="search-form" method="GET">
             <div class="mb-1">
