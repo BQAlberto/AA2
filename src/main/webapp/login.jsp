@@ -81,12 +81,10 @@
 
         <div class="form-floating">
             <input type="text" name="USERNAME" class="form-control" id="floatingInput" placeholder="Username">
-            <!--<label for="floatingInput">Username</label>-->
         </div>
         <br/>
         <div class="form-floating">
             <input type="password" name="PASSWORD" class="form-control" id="floatingPassword" placeholder="Password">
-            <!--<label for="floatingPassword">Password</label>-->
         </div>
 
         <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>

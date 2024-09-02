@@ -48,7 +48,7 @@ public class EditBike extends HttpServlet {
                 return;
             }
 
-            // Obtiene los demás parámetros de la solicitud
+            // Obtiene los demás parámetros
             String CONDITION = request.getParameter("CONDITION");
             String BRAND = request.getParameter("BRAND");
             Part PICTUREPART = request.getPart("PICTURE");
@@ -63,13 +63,13 @@ public class EditBike extends HttpServlet {
                 Files.copy(fileStream, Path.of(imagePath + File.separator + filename));
             }
 
-            // Conecta a la base de datos y busca una bicicleta existente
+            // Conecta a la base de datos y busca bicicleta existente
             Database.connect();
             final Bike existingBike = Database.jdbi.withExtension(BikeDao.class, dao -> dao.getBike(SERIAL_NUMBER));
             final String finalFilename = filename;
 
             if (existingBike == null) {
-                // Inserta una nueva bicicleta si no existe
+                // Inserta nueva bicicleta si no existe
                 final int affectedRows = Database.jdbi.withExtension(BikeDao.class,
                         dao -> dao.addBike(SERIAL_NUMBER, CONDITION, BRAND, MODEL, finalFilename));
                 if (affectedRows > 0) {
@@ -78,7 +78,7 @@ public class EditBike extends HttpServlet {
                     sendError("Failed to add bike", response);
                 }
             } else {
-                // Actualiza la bicicleta existente
+                // Actualiza bicicleta existente
                 final int affectedRows = Database.jdbi.withExtension(BikeDao.class,
                         dao -> dao.updateBike(CONDITION, BRAND, MODEL, finalFilename, SERIAL_NUMBER));
                 if (affectedRows > 0) {

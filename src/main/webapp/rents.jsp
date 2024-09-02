@@ -14,16 +14,16 @@
 <main>
     <h1 CLASS="p-3">My Rents</h1>
     <%
-        // Verificar si el usuario está autenticado
+        // Verificar si usuario está autenticado
         if (request.getSession().getAttribute("CUSTOMER_ID") == null) {
             response.sendRedirect("index.jsp");
             return;  // Asegura que el resto del código no se ejecuta si se redirige
         }
 
-        // Obtener el ID del usuario desde la sesión
+        // Obtener ID del usuario
         int theUserId = (Integer) request.getSession().getAttribute("CUSTOMER_ID");
 
-        // Obtener el término de búsqueda
+        // Obtener búsqueda
         String search;
         if (request.getParameter("search") != null) {
             search = request.getParameter("search").trim();  // Elimina espacios innecesarios
@@ -31,7 +31,7 @@
             search = "";
         }
 
-        // Conectar a la base de datos y obtener los resultados de reservas
+        // Conectar base de datos y obtener reservas
         Database.connect();
         List<Rent> rents;
         if (search.isEmpty()) {
@@ -51,7 +51,7 @@
         </form>
         <div class="list-group">
             <%
-                // Renderizar las reservas solo si la lista no está vacía
+                // Mostrar reservas solo si la lista no está vacía
                 if (!rents.isEmpty()) {
                     for (Rent rent : rents) {
             %>

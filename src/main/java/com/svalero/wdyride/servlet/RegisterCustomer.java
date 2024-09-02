@@ -28,7 +28,7 @@ public class RegisterCustomer extends HttpServlet {
         HttpSession currentSession = request.getSession();
 
         try {
-            // Verifica si algún campo imprescindible está vacío
+            // Verifica campos
             String USERNAME = request.getParameter("USERNAME");
             String PASSWORD = request.getParameter("PASSWORD");
 
@@ -42,17 +42,17 @@ public class RegisterCustomer extends HttpServlet {
                 return;
             }
 
-            // Obtiene los demás parámetros de la solicitud
+            // Obtiene resto de parámetros
             String FIRST_NAME = request.getParameter("FIRST_NAME");
             String LAST_NAME = request.getParameter("LAST_NAME");
             String ROLE = request.getParameter("ROLE");
 
-            // Asigna un valor por defecto si ROLE es nulo o está en blanco
+            // Asigna valor por defecto si ROLE es nulo o está en blanco
             if (ROLE == null || ROLE.isBlank()) {
                 ROLE = "USER";
             }
 
-            // Conecta a la base de datos y busca un usuario existente con el mismo USERNAME
+            // Conecta base de datos y busca usuario existente con mismo USERNAME
             Database.connect();
             final Customer existingCustomer = Database.jdbi.withExtension(CustomerDao.class, dao -> dao.getCustomerByUsername(USERNAME));
 
@@ -61,7 +61,7 @@ public class RegisterCustomer extends HttpServlet {
                 return;
             }
 
-            // Registra el nuevo usuario
+            // Registra nuevo usuario
             final String finalROLE = ROLE;
             Database.jdbi.withExtension(CustomerDao.class, dao -> dao.addCustomer(FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, finalROLE));
 

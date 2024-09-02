@@ -10,17 +10,16 @@
 
 <main>
     <%
-        // Obtener el parámetro 'id' de la solicitud y declararlo como final
         final int rentId = Integer.parseInt(request.getParameter("id"));
 
-        // Conectar a la base de datos y obtener los detalles del alquiler
+        // Conectar base de datos y obtener detalles del alquiler
         Database.connect();
         Rent rent = Database.jdbi.withExtension(RentsDao.class, dao -> dao.getRent(rentId));
 
-        // Obtener la bicicleta asociada al alquiler
+        // Obtener bicicleta asociada al alquiler
         Bike bike = rent.getSERIAL_NUMBER();
 
-        // Obtener el cliente asociado al alquiler
+        // Obtener rent asociado al alquiler
         Customer customer = rent.getCUSTOMER_ID();
     %>
     <div class="d-flex justify-content-center align-items-center" style="min-height: 50vh;">
@@ -33,6 +32,9 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Rent ID: <%=rent.getRENT_ID()%></li>
                 <li class="list-group-item">Customer: <%=customer.getFIRST_NAME()%> <%=customer.getLAST_NAME()%></li>
+                <a href="edit-rent.jsp?RENT_ID=<%=rent.getRENT_ID()%>" class="btn btn-warning btn-sm me-2">EDIT</a>
+                <a href="remove-rent?RENT_ID=<%=rent.getRENT_ID()%>" class="btn btn-danger btn-sm"
+                   onclick="return confirm('Are you sure you want to delete this rent?');">DELETE</a>
             </ul>
         </div>
     </div>

@@ -44,11 +44,11 @@
     int customerId = 0;
     Customer customer = null;
 
-    // Se obtiene el ID del cliente desde los parámetros de la solicitud
+    // Se obtiene ID del cliente desde los parámetros de solicitud
     try {
         customerId = Integer.parseInt(request.getParameter("CUSTOMER_ID"));
     } catch (NumberFormatException e) {
-        // Manejar el error si CUSTOMER_ID no es un número válido
+        // Manejar error si CUSTOMER_ID no es número válido
         e.printStackTrace();
         response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid Customer ID");
         return;
@@ -56,7 +56,7 @@
 
     Database.connect();
 
-    // Obtiene los detalles del cliente usando el ID
+    // Obtiene detalles de cliente usando el ID
     int finalCustomerId = customerId;
     customer = Database.jdbi.withExtension(CustomerDao.class, dao -> dao.getCustomer(finalCustomerId));
 

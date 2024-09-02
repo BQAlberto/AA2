@@ -25,11 +25,11 @@
                 timeout: 600000,
                 success: function(data) {
                     $("#result").html(data).removeClass("alert-danger").addClass("alert-success").show();
-                    $("#edit-button").prop("disabled", false); // Reactiva el botón después de la respuesta
+                    $("#edit-button").prop("disabled", false); // Reactiva botón después de la respuesta
                 },
                 error: function(error) {
                     $("#result").html(error.responseText).removeClass("alert-success").addClass("alert-danger").show();
-                    $("#edit-button").prop("disabled", false); // Reactiva el botón en caso de error
+                    $("#edit-button").prop("disabled", false); // Reactiva botón en caso de error
                 }
             });
         });
@@ -43,10 +43,10 @@
     String SERIAL_NUMBER;
     Bike bike = null;
     if (request.getParameter("SERIAL_NUMBER") == null) {
-        // Se accede al formulario para registrar nueva bici
+        // Formulario para registrar nueva bici.
         SERIAL_NUMBER = null;
     } else {
-        // Se accede al formulario para editar la bici con el número de serie que indique.
+        // Formulario para editar la bici con el número de serie que indique.
         SERIAL_NUMBER = request.getParameter("SERIAL_NUMBER");
         Database.connect();
         bike = Database.jdbi.withExtension(BikeDao.class, dao -> dao.getBike(SERIAL_NUMBER));

@@ -27,4 +27,10 @@ public interface RentsDao {
 
     @SqlUpdate("INSERT INTO RENTS (SERIAL_NUMBER, CUSTOMER_ID) VALUES (?, ?)")
     int addRent(String SERIAL_NUMBER, int CUSTOMER_ID);
+
+    @SqlUpdate("UPDATE RENTS SET SERIAL_NUMER = ? WHERE RENT_ID = ?")
+    int updateRent(String SERIAL_NUMBER, int RENT_ID);
+
+    @SqlUpdate("DELETE FROM RENTS WHERE RENT_ID = ?")
+    int removeRENT(int RENT_ID);
 }

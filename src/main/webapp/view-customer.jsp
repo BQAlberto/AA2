@@ -8,10 +8,10 @@
 
 <main>
     <%
-        // Obtener el parámetro 'id' de la solicitud y declarar como final
+        // Obtener parámetro 'id' de solicitud y declarar como final
         final int customerId = Integer.parseInt(request.getParameter("id"));
 
-        // Conectar a la base de datos y obtener los detalles del cliente
+        // Conectar base de datos y obtener los detalles del cliente
         Database.connect();
         Customer customer = Database.jdbi.withExtension(CustomerDao.class, dao -> dao.getCustomer(customerId));
     %>

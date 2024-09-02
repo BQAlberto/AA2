@@ -27,17 +27,17 @@
             search = "";
         }
 
-        // Verificar si el usuario está autenticado
+        // Verificar si usuario está autenticado
         if (request.getSession().getAttribute("CUSTOMER_ID") == null) {
             response.sendRedirect("index.jsp");
             return;  // Asegura que el resto del código no se ejecuta si se redirige
         }
 
-        // Inicializar la lista de clientes
+        // Inicializa lista de clientes
         List<Customer> customers = new ArrayList<>();
         Database.connect();
 
-        // Buscar clientes basados en el término de búsqueda
+        // Buscar clientes del término de búsqueda
         if (search.isEmpty()) {
             customers = Database.jdbi.withExtension(CustomerDao.class, dao -> dao.getAllCustomers());
         } else {
@@ -57,7 +57,7 @@
 
         <div class="list-group">
             <%
-                // Renderizar los clientes solo si la lista no está vacía
+                // Muestra clientes solo si la lista no está vacía
                 if (!customers.isEmpty()) {
                     for (Customer customer : customers) {
             %>
@@ -71,7 +71,6 @@
                         <p class="mb-0 text-primary"><strong><%=customer.getUSERNAME()%></strong></p>
                     </div>
                     <div class="ms-2 d-flex">
-                        <!-- Contenedor para alinear los botones -->
                         <a href="edit-customer.jsp?CUSTOMER_ID=<%=customer.getCUSTOMER_ID()%>" class="btn btn-warning btn-sm me-2">EDIT</a>
                         <a href="remove-customer?CUSTOMER_ID=<%=customer.getCUSTOMER_ID()%>" class="btn btn-danger btn-sm"
                            onclick="return confirm('Are you sure you want to delete this customer?');">DELETE</a>
