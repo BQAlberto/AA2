@@ -35,8 +35,8 @@ public interface CustomerDao {
     @SqlUpdate("INSERT INTO CUSTOMER (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, ROLE) VALUES (?, ?, ?, SHA1_HASH(?), ?)")
     int addCustomer(String FIRST_NAME, String LAST_NAME, String USERNAME, String PASSWORD, String ROLE);
 
-    @SqlUpdate("UPDATE CUSTOMER SET FIRST_NAME = ?, LAST_NAME = ?, USERNAME = ?, ROLE = ? WHERE CUSTOMER_ID = ?")
-    int updateCustomer(String FIRST_NAME, String LAST_NAME, String USERNAME, String ROLE);
+    @SqlUpdate("UPDATE CUSTOMER SET FIRST_NAME = ?, LAST_NAME = ? WHERE CUSTOMER_ID = ?")
+    int updateCustomer(String FIRST_NAME, String LAST_NAME, int CUSTOMER_ID);
 
     @SqlUpdate("DELETE FROM CUSTOMER WHERE CUSTOMER_ID = ?")
     int removeCustomer(int CUSTOMER_ID);

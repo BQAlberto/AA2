@@ -70,6 +70,12 @@
                     <div>
                         <p class="mb-0 text-primary"><strong><%=customer.getUSERNAME()%></strong></p>
                     </div>
+                    <div class="ms-2 d-flex">
+                        <!-- Contenedor para alinear los botones -->
+                        <a href="edit-customer.jsp?CUSTOMER_ID=<%=customer.getCUSTOMER_ID()%>" class="btn btn-warning btn-sm me-2">EDIT</a>
+                        <a href="remove-customer?CUSTOMER_ID=<%=customer.getCUSTOMER_ID()%>" class="btn btn-danger btn-sm"
+                           onclick="return confirm('Are you sure you want to delete this customer?');">DELETE</a>
+                    </div>
                 </div>
             </a>
             <%
